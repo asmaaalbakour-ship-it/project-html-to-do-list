@@ -1,0 +1,141 @@
+/* إزالة الهوامش الافتراضية */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* الصفحة */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f1e8;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    direction: rtl;
+}
+
+/* صندوق قائمة المهام */
+.todo-container {
+    width: 450px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* العنوان */
+h1 {
+    text-align: center;
+    color: #4f7d58;
+    margin-bottom: 25px;
+}
+
+/* منطقة الإدخال */
+.input-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* مربع إدخال المهمة */
+#taskInput {
+    flex: 1;
+    padding: 12px;
+
+    border: 2px solid #d8e5d5;
+    border-radius: 8px;
+
+    outline: none;
+    font-size: 16px;
+}
+
+/* عند الضغط على input */
+#taskInput:focus {
+    border-color: #7ca982;
+}
+
+/* زر الإضافة */
+#addBtn {
+    padding: 12px 20px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #7ca982;
+    color: white;
+
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* عند تمرير الماوس */
+#addBtn:hover {
+    background-color: #5f8d67;
+}
+
+/* رسالة عدم وجود مهام */
+#emptyMessage {
+    text-align: center;
+    color: #888;
+    margin: 20px 0;
+}
+
+/* قائمة المهام */
+#taskList {
+    list-style: none;
+}
+
+/* المهمة */
+#taskList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 12px;
+    margin-bottom: 10px;
+
+    background-color: #f3f7f1;
+    border-radius: 8px;
+}
+
+/* نص المهمة */
+#taskList li span {
+    cursor: pointer;
+}
+
+/* المهمة المكتملة */
+#taskList li.completed span {
+    text-decoration: line-through;
+    color: #999;
+}
+
+/* زر الحذف */
+#taskList li button {
+    border: none;
+    background-color: #d97b7b;
+    color: white;
+
+    padding: 7px 12px;
+    border-radius: 6px;
+
+    cursor: pointer;
+}
+
+/* عند تمرير الماوس على الحذف */
+#taskList li button:hover {
+    background-color: #c45f5f;
+}
+
+/* عدد المهام */
+.task-info {
+    margin-top: 20px;
+    text-align: center;
+
+    color: #555;
+    font-size: 15px;
+}
