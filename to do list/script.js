@@ -7,99 +7,97 @@ const emptyMessage = document.getElementById("emptyMessage");
 const taskCount = document.getElementById("taskCount");
 
 function saveTasks() {
-localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
 function addTask() {
-const taskText = taskInput.value.trim();
+    const taskText = taskInput.value.trim();
 
-```
-if (taskText === "") {
-    return;
-}
+    if (taskText === "") {
+        return;
+    }
 
-const task = {
-    id: Date.now(),
-    text: taskText,
-    completed: false
-};
+    const task = {
+        id: Date.now(),
+        text: taskText,
+        completed: false
+    };
 
-tasks.push(task);
+    tasks.push(task);
 
-taskInput.value = "";
+    taskInput.value = "";
 
-saveTasks();
-displayTasks();
-```
-
+    saveTasks();
+    displayTasks();
 }
 
 function displayTasks() {
-taskList.innerHTML = "";
+    taskList.innerHTML = "";
 
-```
-emptyMessage.style.display =
-    tasks.length === 0 ? "block" : "none";
-
-tasks.forEach(function (task) {
-    const li = document.createElement("li");
-
-    li.innerHTML = `
-        <span onclick="toggleTask(${task.id})">
-            ${task.text}
-        </span>
-
-        <button onclick="deleteTask(${task.id})">
-            حذف
-        </button>
-    `;
-
-    if (task.completed) {
-        li.classList.add("completed");
+    if (tasks.length === 0) {
+        emptyMessage.style.display = "block";
+    } else {
+        emptyMessage.style.display = "none";
     }
 
-    taskList.appendChild(li);
-});
+    tasks.forEach(function (task) {
+        const li = document.createElement("li");
 
-taskCount.textContent = tasks.length;
-```
+        const span = document.createElement("span");
+        span.textContent = task.text;
 
+        if (task.completed) {
+            li.classList.add("completed");
+        }
+
+        span.addEventListener("click", function () {
+            toggleTask(task.id);
+        });
+
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "حذف";
+
+        deleteButton.addEventListener("click", function () {
+            deleteTask(task.id);
+        });
+
+        li.appendChild(span);
+        li.appendChild(deleteButton);
+
+        taskList.appendChild(li);
+    });
+
+    taskCount.textContent = tasks.length;
 }
 
 function deleteTask(id) {
-tasks = tasks.filter(function (task) {
-return task.id !== id;
-});
+    tasks = tasks.filter(function (task) {
+        return task.id !== id;
+    });
 
-```
-saveTasks();
-displayTasks();
-```
-
+    saveTasks();
+    displayTasks();
 }
 
 function toggleTask(id) {
-tasks = tasks.map(function (task) {
-if (task.id === id) {
-task.completed = !task.completed;
-}
+    tasks = tasks.map(function (task) {
+        if (task.id === id) {
+            task.completed = !task.completed;
+        }
 
-```
-    return task;
-});
+        return task;
+    });
 
-saveTasks();
-displayTasks();
-```
-
+    saveTasks();
+    displayTasks();
 }
 
 addBtn.addEventListener("click", addTask);
 
 taskInput.addEventListener("keydown", function (event) {
-if (event.key === "Enter") {
-addTask();
-}
+    if (event.key === "Enter") {
+        addTask();
+    }
 });
 
 displayTasks();
